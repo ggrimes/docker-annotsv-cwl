@@ -2,7 +2,7 @@ FROM ubuntu:xenial
 MAINTAINER Alexander Paul <alex.paul@wustl.edu>
 
 LABEL \
-  version="1.0.0" \
+  version="2.1" \
   description="Docker image to run AnnotSV"
 
 RUN apt-get update -y && apt-get install -y \

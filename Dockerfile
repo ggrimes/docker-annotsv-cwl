@@ -42,3 +42,5 @@ RUN wget https://lbgi.fr/AnnotSV/Sources/AnnotSV_$ANNOTSV_VERSION.tar.gz && \
 ENV ANNOTSV=/opt/AnnotSV_$ANNOTSV_VERSION
 
 WORKDIR /
+
+ENV PATH="${ANNOTSV}/bin:${PATH}"

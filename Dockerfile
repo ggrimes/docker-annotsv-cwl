@@ -46,8 +46,7 @@ RUN wget https://github.com/lgmgeo/AnnotSV/archive/${ANNOTSV_COMMIT}.zip && \
   rm ${ANNOTSV_COMMIT}.zip && \
   cd ${ANNOTSV} && \
   make PREFIX=. install && \
-  make PREFIX=. install-human-annotation && \
-  make PREFIX=. install-mouse-annotation
+  make PREFIX=. install-human-annotation
 
 ENV PATH="${ANNOTSV}/bin:${PATH}"
 

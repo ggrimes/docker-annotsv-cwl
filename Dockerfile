@@ -13,12 +13,12 @@ RUN apt-get update -y && apt-get install -y \
   python \
   tar \
   tcl \
+  unzip \
   wget \
   zlib1g-dev
 
 ENV BEDTOOLS_INSTALL_DIR=/opt/bedtools2
 ENV BEDTOOLS_VERSION=2.28.0
-ENV ANNOTSV_VERSION=2.1
 
 WORKDIR /tmp
 RUN wget https://github.com/arq5x/bedtools2/releases/download/v$BEDTOOLS_VERSION/bedtools-$BEDTOOLS_VERSION.tar.gz && \
@@ -34,13 +34,20 @@ WORKDIR /
 RUN ln -s $BEDTOOLS_INSTALL_DIR/bin/* /usr/bin/ && \
   rm -rf /tmp/bedtools2
 
-WORKDIR /opt
-RUN wget https://lbgi.fr/AnnotSV/Sources/AnnotSV_$ANNOTSV_VERSION.tar.gz && \
-  tar -zxf AnnotSV_$ANNOTSV_VERSION.tar.gz && \
-  rm -f AnnotSV_$ANNOTSV_VERSION.tar.gz
-
+ENV ANNOTSV_VERSION=2.3
+ENV ANNOTSV_COMMIT=b5a65c1ddd71d24547f8eab521925f98ece10df4
 ENV ANNOTSV=/opt/AnnotSV_$ANNOTSV_VERSION
 
-WORKDIR /
+WORKDIR /opt
+RUN wget https://github.com/lgmgeo/AnnotSV/archive/${ANNOTSV_COMMIT}.zip && \
+  unzip ${ANNOTSV_COMMIT}.zip && \
+  mv AnnotSV-${ANNOTSV_COMMIT} ${ANNOTSV} && \
+  rm ${ANNOTSV_COMMIT}.zip && \
+  cd ${ANNOTSV} && \
+  make PREFIX=. install && \
+  make PREFIX=. install-human-annotation && \
+  make PREFIX=. install-mouse-annotation
 
 ENV PATH="${ANNOTSV}/bin:${PATH}"
+
+WORKDIR /

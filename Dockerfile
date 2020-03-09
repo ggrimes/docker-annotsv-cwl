@@ -6,6 +6,7 @@ LABEL \
   description="Docker image to run AnnotSV"
 
 RUN apt-get update -y && apt-get install -y \
+  curl \
   g++ \
   libbz2-dev \
   liblzma-dev \

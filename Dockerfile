@@ -14,6 +14,7 @@ RUN apt-get update -y && apt-get install -y \
   python \
   tar \
   tcl \
+  tcllib \
   unzip \
   wget \
   zlib1g-dev

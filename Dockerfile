@@ -45,8 +45,7 @@ RUN wget https://github.com/lgmgeo/AnnotSV/archive/${ANNOTSV_COMMIT}.zip && \
   mv AnnotSV-${ANNOTSV_COMMIT} ${ANNOTSV} && \
   rm ${ANNOTSV_COMMIT}.zip && \
   cd ${ANNOTSV} && \
-  make PREFIX=. install && \
-  make PREFIX=. install-human-annotation
+  make PREFIX=. install
 
 ENV PATH="${ANNOTSV}/bin:${PATH}"
 
